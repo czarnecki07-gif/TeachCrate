@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeachCrate | Free Digital Tools for Teachers</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="TeachCrate offers free digital tools for teachers. Manage your classroom, calculate weighted grades, use timers, and generate groups instantly. Save time and inspire your students.">
+    <meta name="keywords" content="free teacher tools, classroom management, grading calculator, random student picker, classroom timer, group generator, digital tools for teachers, teaching resources">
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Vercel Web Analytics -->
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+
+    <style>
+        :root {
+            --navy: #0B192C;
+            --navy-light: #1A365D;
+            --gold: #F5B041;
+            --gold-dark: #D68910;
+            --parchment: #FDFBF7;
+            --text: #2C3E50;
+            --border: #E2E8F0;
+            --card-bg: #FFFFFF;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Nunito', sans-serif; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body { 
+            background-color: var(--parchment); 
+            color: var(--text); 
+            line-height: 1.6; 
+            background-image: radial-gradient(#f0e6d2 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        /* ==================== NAGŁÓWEK ==================== */
+        header { 
+            background: #FFFFFF;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Zgrabne menu górne */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .main-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .main-menu a {
+            text-decoration: none;
+            color: var(--navy);
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+        }
+
+        .main-menu a:hover {
+            color: var(--gold-dark);
+        }
+
+        .lang-selector {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #F8FAFC;
+            border: 1px solid var(--border);
+            padding: 4px 12px;
+            border-radius: 50px;
+        }
+        
+        .lang-selector label {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--navy);
+            text-transform: uppercase;
+        }
+
+        .lang-selector select {
+            background: transparent;
+            color: var(--navy);
+            border: none;
+            font-weight: 800;
+            font-size: 0.85rem;
+            cursor: pointer;
+            outline: none;
+        }
+
+        /* Sekcja z logo - bez pustych przestrzeni */
+        .hero-section {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            background: #FFFFFF;
+        }
+
+        .hero-logo { 
+            width: 100%; 
+            max-width: 850px; 
+            height: auto; 
+            display: block;
+        }
+        
+        /* ==================== NARZĘDZIA ==================== */
+        .section-title { 
+            text-align: center; 
+            margin: 3rem 0 1.5rem; 
+            font-size: 1.6rem; 
+            font-weight: 900; 
+            color: var(--navy); 
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 40%;
+            height: 3px;
+            background: var(--gold);
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+        
+        .grid { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 1.5rem 2rem; 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); 
+            gap: 2rem; 
+        }
+        
+        .card { 
+            background: var(--card-bg); 
+            border-radius: 16px; 
+            padding: 1.8rem; 
+            box-shadow: 0 6px 12px rgba(11, 25, 44, 0.08); 
+            border: 1px solid var(--border); 
+            display: flex; 
+            flex-direction: column; 
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(11, 25, 44, 0.12);
+        }
+        
+        .card-title { 
+            font-size: 1.2rem; 
+            font-weight: 900; 
+            color: var(--navy); 
+            margin-bottom: 0.5rem; 
+        }
+        .card p.desc { font-size: 0.9rem; margin-bottom: 1.2rem; color: #64748B; font-weight: 600; }
+        
+        .input-group { margin-bottom: 1rem; }
+        .input-group label { display: block; font-size: 0.85rem; font-weight: 800; margin-bottom: 0.4rem; color: var(--navy); text-transform: uppercase; letter-spacing: 0.5px;}
+        
+        input[type="text"], input[type="number"], textarea, select {
+            width: 100%; padding: 0.8rem; border: 2px solid var(--border); border-radius: 10px; font-size: 1rem; font-weight: 600; outline: none; font-family: inherit; background: #F8FAFC; transition: border-color 0.2s;
+        }
+        input:focus, textarea:focus, select:focus { border-color: var(--gold); background: white; }
+        textarea { resize: vertical; min-height: 80px; font-weight: 400; }
+        
+        .btn { 
+            background: var(--gold); 
+            color: var(--navy); 
+            border: none; 
+            padding: 0.8rem 1rem; 
+            border-radius: 10px; 
+            font-weight: 900; 
+            cursor: pointer; 
+            width: 100%; 
+            font-size: 1rem;
+            transition: all 0.2s; 
+            box-shadow: 0 4px 0 var(--gold-dark);
+        }
+        .btn:active { transform: translateY(4px); box-shadow: 0 0 0 var(--gold-dark); }
+        .btn-secondary { background: #E2E8F0; color: var(--navy); box-shadow: 0 4px 0 #CBD5E1; }
+        .btn-secondary:active { box-shadow: 0 0 0 #CBD5E1; }
+        
+        .display-box { 
+            background: var(--navy); 
+            color: white; 
+            border-radius: 12px; 
+            padding: 1rem; 
+            text-align: center; 
+            font-size: 2rem; 
+            font-weight: 900; 
+            margin: 1rem 0; 
+            letter-spacing: 2px;
+            border: 3px solid var(--gold);
+            box-shadow: inset 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .timer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 1rem; }
+        .timer-btn { padding: 0.5rem 0; font-size: 0.85rem; background: #F1F5F9; border: 2px solid #E2E8F0; border-radius: 8px; cursor: pointer; font-weight: 800; color: var(--navy); transition: 0.1s; }
+        .timer-btn:hover { background: var(--gold); border-color: var(--gold); }
+        
+        .roster-sync { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: #166534; background: #DCFCE7; padding: 0.4rem 0.8rem; border-radius: 50px; margin-bottom: 1rem; font-weight: 700;}
+        .result-badge { text-align: center; font-size: 2.5rem; font-weight: 900; color: var(--gold-dark); text-shadow: 1px 1px 0 var(--navy); margin: 1rem 0; }
+
+        .grade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1rem; }
+        .grade-row { display: flex; gap: 4px; }
+        .grade-row input { padding: 0.6rem 0.2rem; text-align: center; font-size: 1rem; border-radius: 8px; }
+        .grade-row .grade-val { flex: 1.5; font-weight: 800; color: var(--navy); }
+        .grade-row .grade-weight { flex: 1; background: #F1F5F9; color: #64748B; font-size: 0.9rem; }
+
+        /* ==================== SEO CONTENT ==================== */
+        .seo-section {
+            background: #FFFFFF;
+            padding: 4rem 1.5rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border);
+        }
+        .seo-content {
+            max-width: 900px;
+            margin: 0 auto;
+            color: #475569;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+        .seo-content h2 {
+            color: var(--navy);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 900;
+        }
+        .seo-content h3 {
+            color: var(--navy);
+            font-size: 1.3rem;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+        .seo-content p { margin-bottom: 1rem; }
+        .seo-content strong { color: var(--navy); }
+
+        .pro-section { background: var(--navy); color: white; padding: 4rem 1.5rem; text-align: center; border-top: 6px solid var(--gold); }
+        .pro-section h2 { font-size: 2.2rem; margin-bottom: 1rem; color: var(--gold); font-weight: 900;}
+        .pro-section p { max-width: 600px; margin: 0 auto 2rem; color: #CBD5E1; font-size: 1.1rem; }
+        .pro-features { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 2.5rem; }
+        .pro-features span { background: rgba(245, 176, 65, 0.15); color: var(--gold); padding: 0.5rem 1.2rem; border-radius: 50px; font-size: 0.9rem; font-weight: 700; border: 1px solid var(--gold); }
+        
+        footer { text-align: center; padding: 2rem 1rem; background: #050C17; color: #64748B; font-size: 0.9rem; font-weight: 600; }
+        footer strong { color: var(--gold); }
+
+        @media (max-width: 768px) {
+            .top-nav { flex-direction: column; gap: 1rem; padding: 1rem; }
+            .main-menu { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+            .hero-logo { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAGŁÓWEK Z MENU I LOGO -->
+    <header>
+        <div class="top-nav">
+            <nav class="main-menu">
+                <a href="#time" data-i18n="sec_time">Time Management</a>
+                <a href="#class" data-i18n="sec_class">Classroom Management</a>
+                <a href="#assess" data-i18n="sec_assess">Assessment & Grading</a>
+            </nav>
+            <div class="lang-selector">
+                <label>Lang</label>
+                <select id="langSelect" onchange="changeLanguage(this.value)">
+                    <option value="en">EN</option>
+                    <option value="pl">PL</option>
+                    <option value="es">ES</option>
+                    <option value="fr">FR</option>
+                    <option value="pt">PT</option>
+                    <option value="de">DE</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="hero-section">
+            <img src="logo.png" alt="TeachCrate - Free Digital Tools for Teachers" class="hero-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <h1 style="display:none; color:var(--navy); font-size: 3rem; font-weight:900; padding: 2rem 0;">Teach<span style="color:var(--gold)">Crate</span></h1>
+        </div>
+    </header>
+
+    <h2 class="section-title" id="time" data-i18n="sec_time">Time Management</h2>
+    <main class="grid">
+        <div class="card">
+            <div class="card-title" data-i18n="tool_timer_title">Classroom Timer</div>
+            <p class="desc" data-i18n="tool_timer_desc">A clear countdown for any activity. Beeps when done.</p>
+            <div class="display-box" id="timerDisplay">00:00</div>
+            <div class="timer-grid">
+                <button class="timer-btn" onclick="startTimer(60)">1m</button>
+                <button class="timer-btn" onclick="startTimer(300)">5m</button>
+                <button class="timer-btn" onclick="startTimer(600)">10m</button>
+                <button class="timer-btn" onclick="startTimer(900)">15m</button>
+                <button class="timer-btn" onclick="startTimer(1200)">20m</button>
+                <button class="timer-btn" onclick="startTimer(1500)">25m</button>
+                <button class="timer-btn" onclick="startTimer(1800)">30m</button>
+                <button class="timer-btn" onclick="startTimer(2700)">45m</button>
+                <button class="timer-btn" onclick="startTimer(3600)">60m</button>
+                <button class="timer-btn" onclick="startTimer(4500)">75m</button>
+                <button class="timer-btn" onclick="startTimer(5400)">90m</button>
+                <button class="timer-btn" onclick="startTimer(7200)">120m</button>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+                <input type="number" id="customMinutes" placeholder="Custom (min)" min="1" max="999" style="flex: 1;" data-i18n-placeholder="tool_timer_custom">
+                <button class="btn" style="flex: 1;" onclick="startCustomTimer()" data-i18n="tool_timer_set">Set</button>
+            </div>
+            <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="resetTimer()" data-i18n="btn_reset">Reset</button>
+        </div>
+
+        <div class="card">
+            <div class="card-title" data-i18n="tool_pomo_title">Pomodoro Focus</div>
+            <p class="desc" data-i18n="tool_pomo_desc">25 minutes of work, 5 minutes of rest. Perfect for deep focus.</p>
+            <div class="display-box" id="pomoDisplay" style="color: var(--gold);">25:00</div>
+            <div style="text-align: center; margin-bottom: 1rem; font-weight: 800;">
+                <span style="color: #64748B;" data-i18n="tool_pomo_status">Status:</span> <span id="pomoPhase" style="color: var(--navy);">WORK</span>
+                <br>
+                <span style="color: #64748B;" data-i18n="tool_pomo_completed">Completed:</span> <span id="pomoCount" style="color: var(--gold-dark);">0</span>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+                <button class="btn" onclick="togglePomo()" id="pomoToggleBtn" data-i18n="btn_start">Start</button>
+                <button class="btn btn-secondary" onclick="resetPomo()" data-i18n="btn_reset">Reset</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title" data-i18n="tool_sw_title">Stopwatch</div>
+            <p class="desc" data-i18n="tool_sw_desc">Precise timing for experiments, sports, or quick tasks.</p>
+            <div class="display-box" id="swDisplay">00:00.00</div>
+            <div style="display: flex; gap: 0.5rem;">
+                <button class="btn" onclick="toggleStopwatch()" id="swToggleBtn" data-i18n="btn_start">Start</button>
+                <button class="btn btn-secondary" onclick="resetStopwatch()" data-i18n="btn_reset">Reset</button>
+            </div>
+        </div>
+    </main>
+
+    <h2 class="section-title" id="class" data-i18n="sec_class">Classroom Management</h2>
+    <main class="grid">
+        <div class="card">
+            <div class="card-title" data-i18n="tool_rand_title">Random Student Picker</div>
+            <p class="desc" data-i18n="tool_rand_desc">Paste your class list once. It's saved automatically.</p>
+            <div class="roster-sync" data-i18n="tool_rand_sync">Private & Saved Locally</div>
+            <textarea id="studentList" placeholder="Paste names here (one per line)..." data-i18n-placeholder="tool_rand_placeholder"></textarea>
+            <div class="result-badge" id="pickedStudent">?</div>
+            <div style="display: flex; gap: 0.5rem;">
+                <button class="btn btn-secondary" onclick="loadSampleRoster()" data-i18n="btn_sample">Try Sample</button>
+                <button class="btn" onclick="pickStudent()" data-i18n="btn_pick">Pick!</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title" data-i18n="tool_group_title">Group Generator</div>
+            <p class="desc" data-i18n="tool_group_desc">Instantly split your class into balanced teams.</p>
+            <div class="roster-sync" data-i18n="tool_group_sync">Syncs with the roster</div>
+            <div class="input-group">
+                <label data-i18n="tool_group_label">How to split?</label>
+                <div style="display: flex; gap: 0.5rem;">
+                    <select id="groupMode" style="flex: 1;">
+                        <option value="groups" data-i18n="tool_group_opt1">Number of Groups</option>
+                        <option value="size" data-i18n="tool_group_opt2">Students per Group</option>
+                    </select>
+                    <input type="number" id="groupCount" value="4" min="1" style="flex: 1;">
+                </div>
+            </div>
+            <div class="display-box" id="groupOutput" style="font-size: 0.95rem; text-align: left; min-height: 100px; max-height: 200px; overflow-y: auto; letter-spacing: 0; font-weight: 600;">Groups will appear here...</div>
+            <button class="btn" onclick="makeGroups()" data-i18n="btn_generate">Generate Groups</button>
+        </div>
+
+        <div class="card">
+            <div class="card-title" data-i18n="tool_dice_title">Dice & Coin</div>
+            <p class="desc" data-i18n="tool_dice_desc">Quick randomizers for class games and brain breaks.</p>
+            <div class="display-box" id="diceResult" style="font-size: 3.5rem; height: 120px; display: flex; align-items: center; justify-content: center;">-</div>
+            <div class="timer-grid" style="grid-template-columns: repeat(2, 1fr);">
+                <button class="timer-btn" onclick="rollDie(6)">Roll D6</button>
+                <button class="timer-btn" onclick="rollDie(20)">Roll D20</button>
+                <button class="timer-btn" onclick="rollDie(100)">Roll D100</button>
+                <button class="timer-btn" onclick="flipCoin()" data-i18n="btn_flip">Flip Coin</button>
+            </div>
+        </div>
+    </main>
+
+    <h2 class="section-title" id="assess" data-i18n="sec_assess">Assessment & Grading</h2>
+    <main class="grid">
+        <div class="card">
+            <div class="card-title" data-i18n="tool_grade_title">Quick Grades</div>
+            <p class="desc" data-i18n="tool_grade_desc">Type grades and weights. Leave weight empty for standard (1). Updates live.</p>
+            <div class="grade-grid" id="gradeGrid"></div>
+            <div style="text-align: center; background: #F8FAFC; padding: 1rem; border-radius: 12px; border: 2px dashed var(--gold); margin-top: auto;">
+                <div style="font-size: 0.85rem; color: var(--navy); font-weight: 800; text-transform: uppercase;" data-i18n="tool_grade_avg">Average</div>
+                <div style="font-size: 2.8rem; font-weight: 900; color: var(--navy); line-height: 1.1;" id="weightedAvg">-</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title" data-i18n="tool_quiz_title">Quiz Score</div>
+            <p class="desc" data-i18n="tool_quiz_desc">Turn correct answers into a percentage instantly.</p>
+            <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                <div class="input-group" style="flex: 1; margin-bottom: 0;">
+                    <label data-i18n="tool_quiz_correct">Correct</label>
+                    <input type="text" inputmode="numeric" id="quizCorrect" placeholder="17" oninput="calcQuizScore()">
+                </div>
+                <div class="input-group" style="flex: 1; margin-bottom: 0;">
+                    <label data-i18n="tool_quiz_total">Total</label>
+                    <input type="text" inputmode="numeric" id="quizTotal" placeholder="23" oninput="calcQuizScore()">
+                </div>
+            </div>
+            <div style="text-align: center; background: #F8FAFC; padding: 1rem; border-radius: 12px; border: 2px dashed var(--gold); margin-top: auto;">
+                <div style="font-size: 0.85rem; color: var(--navy); font-weight: 800; text-transform: uppercase;" data-i18n="tool_quiz_score">Score</div>
+                <div style="font-size: 2.8rem; font-weight: 900; color: var(--gold-dark); line-height: 1.1;" id="quizResult">-</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title" data-i18n="tool_text_title">Text Analyzer</div>
+            <p class="desc" data-i18n="tool_text_desc">Paste a text to see reading time and word count.</p>
+            <textarea id="wordText" placeholder="Paste text here..." data-i18n-placeholder="tool_text_placeholder" style="min-height: 100px; flex-grow: 1;" oninput="countWords()"></textarea>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 1rem; text-align: center;">
+                <div style="background: #F1F5F9; padding: 0.8rem; border-radius: 8px;">
+                    <div style="font-size: 0.75rem; color: #64748B; font-weight: 800; text-transform: uppercase;" data-i18n="tool_text_words">Words</div>
+                    <div style="font-size: 1.5rem; font-weight: 900; color: var(--navy);" id="wordCount">0</div>
+                </div>
+                <div style="background: #F1F5F9; padding: 0.8rem; border-radius: 8px;">
+                    <div style="font-size: 0.75rem; color: #64748B; font-weight: 800; text-transform: uppercase;" data-i18n="tool_text_read">Read Time</div>
+                    <div style="font-size: 1.5rem; font-weight: 900; color: var(--gold-dark);" id="readTime">0m</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- SEKCJA SEO (Treść dla robotów i użytkowników) -->
+    <section class="seo-section">
+        <div class="seo-content">
+            <h2>The Ultimate Free Digital Toolbox for Teachers</h2>
+            <p>Welcome to <strong>TeachCrate</strong>, your new favorite destination for <strong>free digital tools for teachers</strong>. We understand that modern educators are busier than ever. Between lesson planning, grading, and managing a classroom, time is a precious commodity. That's why we've built a curated collection of simple, fast, and highly effective web tools designed specifically for your daily teaching workflow. No downloads, no complex setups—just click and teach.</p>
+            
+            <h3>Classroom Management Made Easy</h3>
+            <p>Keeping students engaged and organized is key to a successful lesson. Our <strong>Random Student Picker</strong> ensures fair participation and keeps everyone on their toes. Need to create teams for a group project? The <strong>Group Generator</strong> instantly divides your class roster into balanced teams, saving you from the headache of manual sorting. You can even use our interactive Dice and Coin tools for fun brain breaks or classroom games.</p>
+            
+            <h3>Time Management & Pomodoro Focus</h3>
+            <p>Time flies when you're teaching, but our <strong>Classroom Timer</strong> helps you stay on track. Whether it's a 5-minute warm-up or a 45-minute exam, our full-screen countdown is visible from anywhere in the room and beeps when time is up. For deep work sessions, try our Pomodoro timer to help students (and yourself) maintain focus and avoid burnout.</p>
+            
+            <h3>Assessment & Grading Calculators</h3>
+            <p>Grading doesn't have to be a chore. Our <strong>Quick Grades calculator</strong> allows you to instantly compute weighted averages. Just type the grades and their weights, and the tool does the math for you in real-time. We also offer a simple Quiz Score calculator to quickly convert correct answers into percentages. And for reading assignments, our Text Analyzer gives you an instant word count and estimated reading time.</p>
+        </div>
+    </section>
+
+    <section class="pro-section">
+        <h2 data-i18n="pro_title">Unlock TeachCrate Pro</h2>
+        <p data-i18n="pro_desc">Coming soon — extra magic for teachers who want to save even more time.</p>
+        <div class="pro-features">
+            <span data-i18n="pro_f1">Export to PDF</span>
+            <span data-i18n="pro_f2">Save Multiple Rosters</span>
+            <span data-i18n="pro_f3">AI Lesson Planner</span>
+            <span data-i18n="pro_f4">Custom Branding</span>
+        </div>
+        <button class="btn" style="max-width: 300px; margin: 0 auto; display: block;" onclick="alert('Thanks! You are on the waitlist.')" data-i18n="pro_btn">Join the Waitlist</button>
+    </section>
+
+    <footer>
+        <p>&copy; <span id="currentYear"></span> <strong>TeachCrate</strong> · <span data-i18n="footer_text">Built for teachers, by teachers · All data stays safely on your device.</span></p>
+    </footer>
+
+    <script>
+        // ============ 1. STAN APLIKACJI ============
+        let currentLang = 'en';
+        let timerInterval = null;
+        let timeLeft = 0;
+        let pomoInterval = null;
+        let pomoTimeLeft = 25 * 60;
+        let pomoPhase = 'work';
+        let pomoCount = 0;
+        let swInterval = null;
+        let swTime = 0;
+        let swStart = 0;
+
+        // ============ 2. GENEROWANIE 10 PÓL OCEN ============
+        const gradeGrid = document.getElementById('gradeGrid');
+        for (let i = 1; i <= 10; i++) {
+            const div = document.createElement('div');
+            div.className = 'grade-row';
+            div.innerHTML = '<input type="text" inputmode="decimal" class="grade-val" placeholder="Grade" oninput="calcWeighted()">' +
+                            '<input type="text" inputmode="decimal" class="grade-weight" placeholder="Weight" oninput="calcWeighted()">';
+            gradeGrid.appendChild(div);
+        }
+
+        // ============ 3. SŁOWNIK TŁUMACZEŃ ============
+        const translations = {
+            en: {
+                sec_time: "Time Management", sec_class: "Classroom Management", sec_assess: "Assessment & Grading",
+                tool_timer_title: "Classroom Timer", tool_timer_desc: "A clear countdown for any activity. Beeps when done.", tool_timer_custom: "Custom (min)", tool_timer_set: "Set",
+                btn_reset: "Reset", btn_start: "Start", btn_pause: "Pause", btn_resume: "Resume",
+                tool_pomo_title: "Pomodoro Focus", tool_pomo_desc: "25 minutes of work, 5 minutes of rest. Perfect for deep focus.", tool_pomo_status: "Status:", tool_pomo_completed: "Completed:", phase_work: "WORK", phase_break: "BREAK",
+                tool_sw_title: "Stopwatch", tool_sw_desc: "Precise timing for experiments, sports, or quick tasks.",
+                tool_rand_title: "Random Student Picker", tool_rand_desc: "Paste your class list once. It's saved automatically.", tool_rand_sync: "Private & Saved Locally", tool_rand_placeholder: "Paste names here (one per line)...", btn_sample: "Try Sample", btn_pick: "Pick!",
+                tool_group_title: "Group Generator", tool_group_desc: "Instantly split your class into balanced teams.", tool_group_sync: "Syncs with the roster", tool_group_label: "How to split?", tool_group_opt1: "Number of Groups", tool_group_opt2: "Students per Group", btn_generate: "Generate Groups", group_label: "Group",
+                tool_dice_title: "Dice & Coin", tool_dice_desc: "Quick randomizers for class games and brain breaks.", btn_flip: "Flip Coin",
+                tool_grade_title: "Quick Grades", tool_grade_desc: "Type grades and weights. Leave weight empty for standard (1). Updates live.", tool_grade_avg: "Average", ph_grade: "Grade", ph_weight: "Weight",
+                tool_quiz_title: "Quiz Score", tool_quiz_desc: "Turn correct answers into a percentage instantly.", tool_quiz_correct: "Correct", tool_quiz_total: "Total", tool_quiz_score: "Score",
+                tool_text_title: "Text Analyzer", tool_text_desc: "Paste a text to see reading time and word count.", tool_text_placeholder: "Paste text here...", tool_text_words: "Words", tool_text_read: "Read Time",
+                pro_title: "Unlock TeachCrate Pro", pro_desc: "Coming soon — extra magic for teachers who want to save even more time.", pro_f1: "Export to PDF", pro_f2: "Save Multiple Rosters", pro_f3: "AI Lesson Planner", pro_f4: "Custom Branding", pro_btn: "Join the Waitlist",
+                footer_text: "Built for teachers, by teachers · All data stays safely on your device."
+            },
+            pl: {
+                sec_time: "Zarządzanie Czasem", sec_class: "Zarządzanie Klasą", sec_assess: "Oceny i Sprawdziany",
+                tool_timer_title: "Minutnik", tool_timer_desc: "Wyraźny odliczający czas dla każdej aktywności. Dzwoni na koniec.", tool_timer_custom: "Własny (min)", tool_timer_set: "Ustaw",
+                btn_reset: "Resetuj", btn_start: "Start", btn_pause: "Pauza", btn_resume: "Wznów",
+                tool_pomo_title: "Skupienie Pomodoro", tool_pomo_desc: "25 minut pracy, 5 minut odpoczynku. Idealne do głębokiej pracy.", tool_pomo_status: "Status:", tool_pomo_completed: "Ukończono:", phase_work: "PRACA", phase_break: "PRZERWA",
+                tool_sw_title: "Stoper", tool_sw_desc: "Precyzyjny pomiar czasu do eksperymentów, sportu i szybkich zadań.",
+                tool_rand_title: "Losowanie Ucznia", tool_rand_desc: "Wklej listę klasy raz. Zapisuje się automatycznie.", tool_rand_sync: "Prywatne i zapisane lokalnie", tool_rand_placeholder: "Wklej imiona (jedno na linię)...", btn_sample: "Przykład", btn_pick: "Losuj!",
+                tool_group_title: "Generator Grup", tool_group_desc: "Natychmiast podziel klasę na zbalansowane drużyny.", tool_group_sync: "Synchronizuje z listą uczniów", tool_group_label: "Jak podzielić?", tool_group_opt1: "Liczba grup", tool_group_opt2: "Uczniów w grupie", btn_generate: "Generuj Grupy", group_label: "Grupa",
+                tool_dice_title: "Kości i Moneta", tool_dice_desc: "Szybkie losowanie do gier klasowych i przerw.", btn_flip: "Rzuć Monetą",
+                tool_grade_title: "Średnia Ocen", tool_grade_desc: "Wpisz oceny i wagi. Puste wagi traktowane są jako 1. Wynik na żywo.", tool_grade_avg: "Średnia", ph_grade: "Ocena", ph_weight: "Waga",
+                tool_quiz_title: "Wynik Sprawdzianu", tool_quiz_desc: "Zamień poprawne odpowiedzi na procenty.", tool_quiz_correct: "Poprawne", tool_quiz_total: "Razem", tool_quiz_score: "Wynik",
+                tool_text_title: "Analiza Tekstu", tool_text_desc: "Wklej tekst, aby zobaczyć czas czytania i liczbę słów.", tool_text_placeholder: "Wklej tekst tutaj...", tool_text_words: "Słowa", tool_text_read: "Czas czytania",
+                pro_title: "Odblokuj TeachCrate Pro", pro_desc: "Już wkrótce — dodatkowa magia dla nauczycieli, którzy chcą oszczędzać jeszcze więcej czasu.", pro_f1: "Eksport do PDF", pro_f2: "Zapis wielu list", pro_f3: "Planowanie lekcji AI", pro_f4: "Własny branding", pro_btn: "Zapisz się na listę",
+                footer_text: "Stworzone dla nauczycieli, przez nauczycieli · Wszystkie dane są bezpieczne na Twoim urządzeniu."
+            },
+            es: {
+                sec_time: "Gestión del Tiempo", sec_class: "Gestión del Aula", sec_assess: "Evaluación y Calificaciones",
+                tool_timer_title: "Temporizador", tool_timer_desc: "Una cuenta regresiva clara para cualquier actividad.", tool_timer_custom: "Personalizado (min)", tool_timer_set: "Fijar",
+                btn_reset: "Reiniciar", btn_start: "Iniciar", btn_pause: "Pausar", btn_resume: "Reanudar",
+                tool_pomo_title: "Enfoque Pomodoro", tool_pomo_desc: "25 minutos de trabajo, 5 de descanso.", tool_pomo_status: "Estado:", tool_pomo_completed: "Completado:", phase_work: "TRABAJO", phase_break: "DESCANSO",
+                tool_sw_title: "Cronómetro", tool_sw_desc: "Tiempo preciso para experimentos o tareas rápidas.",
+                tool_rand_title: "Elegir Estudiante", tool_rand_desc: "Pega tu lista de clase una vez. Se guarda automáticamente.", tool_rand_sync: "Privado y guardado localmente", tool_rand_placeholder: "Pega nombres aquí (uno por línea)...", btn_sample: "Ejemplo", btn_pick: "¡Elegir!",
+                tool_group_title: "Generador de Grupos", tool_group_desc: "Divide tu clase en equipos equilibrados al instante.", tool_group_sync: "Se sincroniza con la lista", tool_group_label: "¿Cómo dividir?", tool_group_opt1: "Número de grupos", tool_group_opt2: "Estudiantes por grupo", btn_generate: "Generar Grupos", group_label: "Grupo",
+                tool_dice_title: "Dados y Moneda", tool_dice_desc: "Aleatorizadores rápidos para juegos.", btn_flip: "Lanzar Moneda",
+                tool_grade_title: "Notas Rápidas", tool_grade_desc: "Escribe notas y pesos. Deja el peso vacío para (1). Se actualiza en vivo.", tool_grade_avg: "Promedio", ph_grade: "Nota", ph_weight: "Peso",
+                tool_quiz_title: "Puntuación de Prueba", tool_quiz_desc: "Convierte respuestas correctas en porcentaje.", tool_quiz_correct: "Correctas", tool_quiz_total: "Total", tool_quiz_score: "Puntuación",
+                tool_text_title: "Analizador de Texto", tool_text_desc: "Pega un texto para ver el tiempo de lectura.", tool_text_placeholder: "Pega el texto aquí...", tool_text_words: "Palabras", tool_text_read: "Tiempo de lectura",
+                pro_title: "Desbloquear TeachCrate Pro", pro_desc: "Muy pronto — magia extra para ahorrar más tiempo.", pro_f1: "Exportar a PDF", pro_f2: "Guardar múltiples listas", pro_f3: "Planificador de IA", pro_f4: "Marca personalizada", pro_btn: "Unirse a la lista",
+                footer_text: "Hecho para profesores, por profesores · Los datos están seguros en tu dispositivo."
+            },
+            fr: {
+                sec_time: "Gestion du Temps", sec_class: "Gestion de Classe", sec_assess: "Évaluation et Notes",
+                tool_timer_title: "Minuteur", tool_timer_desc: "Un compte à rebours clair pour toute activité.", tool_timer_custom: "Personnalisé (min)", tool_timer_set: "Régler",
+                btn_reset: "Réinitialiser", btn_start: "Démarrer", btn_pause: "Pause", btn_resume: "Reprendre",
+                tool_pomo_title: "Focus Pomodoro", tool_pomo_desc: "25 minutes de travail, 5 minutes de repos.", tool_pomo_status: "Statut:", tool_pomo_completed: "Terminé:", phase_work: "TRAVAIL", phase_break: "PAUSE",
+                tool_sw_title: "Chronomètre", tool_sw_desc: "Chronométrage précis pour vos tâches.",
+                tool_rand_title: "Choix d'Élève", tool_rand_desc: "Collez votre liste de classe une fois. Sauvegarde auto.", tool_rand_sync: "Privé et sauvegardé localement", tool_rand_placeholder: "Collez les noms ici...", btn_sample: "Exemple", btn_pick: "Choisir!",
+                tool_group_title: "Générateur de Groupes", tool_group_desc: "Divisez votre classe en équipes équilibrées.", tool_group_sync: "Se synchronise avec la liste", tool_group_label: "Comment diviser ?", tool_group_opt1: "Nombre de groupes", tool_group_opt2: "Élèves par groupe", btn_generate: "Générer", group_label: "Groupe",
+                tool_dice_title: "Dés et Pièce", tool_dice_desc: "Générateurs rapides pour les jeux.", btn_flip: "Lancer la Pièce",
+                tool_grade_title: "Notes Rapides", tool_grade_desc: "Tapez les notes et les coefficients. Laissez vide pour (1).", tool_grade_avg: "Moyenne", ph_grade: "Note", ph_weight: "Coef",
+                tool_quiz_title: "Score de Quiz", tool_quiz_desc: "Convertissez les bonnes réponses en pourcentage.", tool_quiz_correct: "Correct", tool_quiz_total: "Total", tool_quiz_score: "Score",
+                tool_text_title: "Analyseur de Texte", tool_text_desc: "Collez un texte pour voir le temps de lecture.", tool_text_placeholder: "Collez le texte ici...", tool_text_words: "Mots", tool_text_read: "Temps de lecture",
+                pro_title: "Débloquer TeachCrate Pro", pro_desc: "Bientôt disponible — magie supplémentaire pour gagner du temps.", pro_f1: "Export PDF", pro_f2: "Sauvegarder listes", pro_f3: "Planificateur IA", pro_f4: "Image de marque", pro_btn: "Rejoindre la liste",
+                footer_text: "Fait pour les enseignants, par des enseignants · Données sécurisées."
+            },
+            pt: {
+                sec_time: "Gestão do Tempo", sec_class: "Gestão da Sala", sec_assess: "Avaliação e Notas",
+                tool_timer_title: "Cronômetro", tool_timer_desc: "Contagem regressiva clara para qualquer atividade.", tool_timer_custom: "Personalizado (min)", tool_timer_set: "Definir",
+                btn_reset: "Redefinir", btn_start: "Iniciar", btn_pause: "Pausar", btn_resume: "Retomar",
+                tool_pomo_title: "Foco Pomodoro", tool_pomo_desc: "25 min de trabalho, 5 min de descanso.", tool_pomo_status: "Status:", tool_pomo_completed: "Concluído:", phase_work: "TRABALHO", phase_break: "PAUSA",
+                tool_sw_title: "Cronômetro de Precisão", tool_sw_desc: "Tempo preciso para experimentos ou tarefas.", 
+                tool_rand_title: "Escolher Aluno", tool_rand_desc: "Cole a lista de turma uma vez. É salva auto.", tool_rand_sync: "Privado e salvo localmente", tool_rand_placeholder: "Cole nomes aqui...", btn_sample: "Exemplo", btn_pick: "Escolher!",
+                tool_group_title: "Gerador de Grupos", tool_group_desc: "Divida a turma em equipes equilibradas.", tool_group_sync: "Sincroniza com a lista", tool_group_label: "Como dividir?", tool_group_opt1: "Número de grupos", tool_group_opt2: "Alunos por grupo", btn_generate: "Gerar Grupos", group_label: "Grupo",
+                tool_dice_title: "Dados e Moeda", tool_dice_desc: "Aleatorizadores para jogos.", btn_flip: "Jogar Moeda",
+                tool_grade_title: "Notas Rápidas", tool_grade_desc: "Digite notas e pesos. Deixe o peso vazio para (1).", tool_grade_avg: "Média", ph_grade: "Nota", ph_weight: "Peso",
+                tool_quiz_title: "Pontuação do Quiz", tool_quiz_desc: "Transforme acertos em porcentagem.", tool_quiz_correct: "Acertos", tool_quiz_total: "Total", tool_quiz_score: "Pontos",
+                tool_text_title: "Analisador de Texto", tool_text_desc: "Cole um texto para ver o tempo de leitura.", tool_text_placeholder: "Cole o texto aqui...", tool_text_words: "Palavras", tool_text_read: "Tempo de leitura",
+                pro_title: "Desbloquear TeachCrate Pro", pro_desc: "Em breve — magia extra para economizar tempo.", pro_f1: "Exportar para PDF", pro_f2: "Salvar listas", pro_f3: "Planejador de IA", pro_f4: "Marca personalizada", pro_btn: "Entrar na lista",
+                footer_text: "Feito para professores, por professores · Dados seguros."
+            },
+            de: {
+                sec_time: "Zeitmanagement", sec_class: "Klassenführung", sec_assess: "Bewertung & Noten",
+                tool_timer_title: "Timer", tool_timer_desc: "Ein klarer Countdown für jede Aktivität.", tool_timer_custom: "Eigene (Min)", tool_timer_set: "Setzen",
+                btn_reset: "Zurücksetzen", btn_start: "Start", btn_pause: "Pause", btn_resume: "Fortsetzen",
+                tool_pomo_title: "Pomodoro-Fokus", tool_pomo_desc: "25 Minuten Arbeit, 5 Minuten Pause.", tool_pomo_status: "Status:", tool_pomo_completed: "Abgeschlossen:", phase_work: "ARBEIT", phase_break: "PAUSE",
+                tool_sw_title: "Stoppuhr", tool_sw_desc: "Präzise Zeitmessung für Experimente oder Aufgaben.", 
+                tool_rand_title: "Schüler Auslosen", tool_rand_desc: "Klassenliste einmal einfügen. Wird automatisch gespeichert.", tool_rand_sync: "Privat & lokal gespeichert", tool_rand_placeholder: "Namen hier einfügen...", btn_sample: "Beispiel", btn_pick: "Auslosen!",
+                tool_group_title: "Gruppen-Generator", tool_group_desc: "Teilen Sie die Klasse sofort in Teams auf.", tool_group_sync: "Synchronisiert mit der Liste", tool_group_label: "Wie aufteilen?", tool_group_opt1: "Anzahl der Gruppen", tool_group_opt2: "Schüler pro Gruppe", btn_generate: "Gruppen erstellen", group_label: "Gruppe",
+                tool_dice_title: "Würfel & Münze", tool_dice_desc: "Schnelle Zufallsgeneratoren für Spiele.", btn_flip: "Münze werfen",
+                tool_grade_title: "Schnelle Noten", tool_grade_desc: "Noten und Gewichte eingeben. Gewicht leer lassen für (1).", tool_grade_avg: "Durchschnitt", ph_grade: "Note", ph_weight: "Gewicht",
+                tool_quiz_title: "Quiz-Ergebnis", tool_quiz_desc: "Richtige Antworten in Prozent umwandeln.", tool_quiz_correct: "Richtig", tool_quiz_total: "Gesamt", tool_quiz_score: "Ergebnis",
+                tool_text_title: "Text-Analyse", tool_text_desc: "Text einfügen, um Lesezeit und Wörter zu sehen.", tool_text_placeholder: "Text hier einfügen...", tool_text_words: "Wörter", tool_text_read: "Lesezeit",
+                pro_title: "TeachCrate Pro Freischalten", pro_desc: "Demnächst — extra Magie für Lehrer, die Zeit sparen wollen.", pro_f1: "PDF-Export", pro_f2: "Listen speichern", pro_f3: "KI-Planer", pro_f4: "Eigenes Branding", pro_btn: "Auf die Warteliste",
+                footer_text: "Von Lehrern für Lehrer gemacht · Alle Daten bleiben auf Ihrem Gerät."
+            }
+        };
+
+        // ============ 4. FUNKCJE ============
+        function changeLanguage(lang) {
+            if (!translations[lang]) lang = 'en';
+            currentLang = lang;
+            localStorage.setItem('teachcrate_lang', lang);
+            const langSelect = document.getElementById('langSelect');
+            if (langSelect) langSelect.value = lang;
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translations[lang] && translations[lang][key]) {
+                    el.placeholder = translations[lang][key];
+                }
+            });
+
+            updatePomoDisplay();
+            updateButtonStates();
+            
+            document.querySelectorAll('.grade-val').forEach(i => i.placeholder = translations[lang].ph_grade);
+            document.querySelectorAll('.grade-weight').forEach(i => i.placeholder = translations[lang].ph_weight);
+        }
+
+        function updateButtonStates() {
+            const pomoBtn = document.getElementById('pomoToggleBtn');
+            if (pomoInterval) pomoBtn.textContent = translations[currentLang].btn_pause;
+            else if (pomoTimeLeft < 25 * 60 && pomoTimeLeft > 0) pomoBtn.textContent = translations[currentLang].btn_resume;
+            else pomoBtn.textContent = translations[currentLang].btn_start;
+
+            const swBtn = document.getElementById('swToggleBtn');
+            if (swInterval) swBtn.textContent = translations[currentLang].btn_pause;
+            else if (swTime > 0) swBtn.textContent = translations[currentLang].btn_resume;
+            else swBtn.textContent = translations[currentLang].btn_start;
+        }
+
+        function beep() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                for (let i = 0; i < 3; i++) {
+                    const osc = ctx.createOscillator(); const gain = ctx.createGain();
+                    osc.connect(gain); gain.connect(ctx.destination);
+                    osc.frequency.value = 880; gain.gain.value = 0.3;
+                    const start = ctx.currentTime + i * 0.3;
+                    osc.start(start); osc.stop(start + 0.15);
+                }
+            } catch(e) {}
+        }
+
+        function startTimer(seconds) {
+            clearInterval(timerInterval); timeLeft = seconds; updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                timeLeft--; updateTimerDisplay();
+                if (timeLeft <= 0) { clearInterval(timerInterval); beep(); }
+            }, 1000);
+        }
+        function startCustomTimer() {
+            const m = parseInt(document.getElementById('customMinutes').value);
+            if (!isNaN(m) && m > 0) startTimer(m * 60);
+        }
+        function resetTimer() { clearInterval(timerInterval); timeLeft = 0; updateTimerDisplay(); }
+        function updateTimerDisplay() {
+            const m = Math.floor(timeLeft / 60); const s = timeLeft % 60;
+            document.getElementById('timerDisplay').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+        }
+
+        function togglePomo() {
+            if (pomoInterval) { clearInterval(pomoInterval); pomoInterval = null; updateButtonStates(); return; }
+            updateButtonStates();
+            pomoInterval = setInterval(() => {
+                pomoTimeLeft--; updatePomoDisplay();
+                if (pomoTimeLeft <= 0) {
+                    clearInterval(pomoInterval); pomoInterval = null; beep();
+                    if (pomoPhase === 'work') { pomoCount++; document.getElementById('pomoCount').textContent = pomoCount; pomoPhase = 'break'; pomoTimeLeft = 5 * 60; } 
+                    else { pomoPhase = 'work'; pomoTimeLeft = 25 * 60; }
+                    updateButtonStates(); updatePomoDisplay();
+                }
+            }, 1000);
+        }
+        function resetPomo() {
+            clearInterval(pomoInterval); pomoInterval = null; pomoPhase = 'work'; pomoTimeLeft = 25 * 60; pomoCount = 0;
+            document.getElementById('pomoCount').textContent = '0'; updateButtonStates(); updatePomoDisplay();
+        }
+        function updatePomoDisplay() {
+            const m = Math.floor(pomoTimeLeft / 60); const s = pomoTimeLeft % 60;
+            document.getElementById('pomoDisplay').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+            const phaseText = pomoPhase === 'work' ? translations[currentLang].phase_work : translations[currentLang].phase_break;
+            document.getElementById('pomoPhase').textContent = phaseText;
+            document.getElementById('pomoPhase').style.color = pomoPhase === 'work' ? 'var(--navy)' : '#22c55e';
+        }
+
+        function toggleStopwatch() {
+            if (swInterval) { clearInterval(swInterval); swInterval = null; updateButtonStates(); return; }
+            updateButtonStates();
+            swStart = Date.now() - swTime;
+            swInterval = setInterval(() => {
+                swTime = Date.now() - swStart;
+                const totalSec = Math.floor(swTime / 1000); const m = Math.floor(totalSec / 60); const s = totalSec % 60; const cs = Math.floor((swTime % 1000) / 10);
+                document.getElementById('swDisplay').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}.${String(cs).padStart(2,'0')}`;
+            }, 10);
+        }
+        function resetStopwatch() { clearInterval(swInterval); swInterval = null; swTime = 0; updateButtonStates(); document.getElementById('swDisplay').textContent = "00:00.00"; }
+
+        const studentList = document.getElementById('studentList');
+        function loadRoster() { studentList.value = localStorage.getItem('teachcrate_roster') || ''; }
+        studentList.addEventListener('input', () => { localStorage.setItem('teachcrate_roster', studentList.value); });
+        function loadSampleRoster() {
+            const sample = "Emma Smith\nLiam Johnson\nOlivia Brown\nNoah Davis\nAva Wilson\nEthan Moore\nSophia Taylor\nMason Anderson\nIsabella Thomas\nLucas White";
+            studentList.value = sample; localStorage.setItem('teachcrate_roster', sample);
+        }
+        function parseRoster(text) { return text.split(/[\n,;]+/).map(s => s.trim()).filter(s => s.length > 0); }
+
+        function pickStudent() {
+            const students = parseRoster(studentList.value); const display = document.getElementById('pickedStudent');
+            if (students.length === 0) { display.textContent = 'Add names!'; return; }
+            display.textContent = students[Math.floor(Math.random() * students.length)];
+        }
+
+        function makeGroups() {
+            const students = parseRoster(studentList.value); const mode = document.getElementById('groupMode').value;
+            const count = parseInt(document.getElementById('groupCount').value); const output = document.getElementById('groupOutput');
+            if (students.length === 0) { output.innerHTML = '<span style="color:#dc2626">Please add student names first.</span>'; return; }
+            for (let i = students.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [students[i], students[j]] = [students[j], students[i]]; }
+            let numGroups = (mode === 'groups') ? count : Math.ceil(students.length / count);
+            const groups = Array.from({length: numGroups}, () => []);
+            students.forEach((s, i) => groups[i % numGroups].push(s));
+            let html = '';
+            const groupWord = translations[currentLang].group_label;
+            groups.forEach((g, i) => { if (g.length > 0) html += `<div style="margin-bottom: 0.5rem;"><span style="color:var(--gold); font-weight:900;">${groupWord} ${i + 1}:</span> ${g.join(', ')}</div>`; });
+            output.innerHTML = html;
+        }
+
+        function rollDie(sides) { document.getElementById('diceResult').textContent = Math.floor(Math.random() * sides) + 1; }
+        function flipCoin() { document.getElementById('diceResult').textContent = Math.random() < 0.5 ? 'Heads' : 'Tails'; }
+
+        function calcWeighted() {
+            const rows = document.querySelectorAll('.grade-row');
+            let weightedSum = 0; let totalWeight = 0;
+            rows.forEach(row => {
+                let gradeStr = row.querySelector('.grade-val').value.replace(',', '.');
+                let weightStr = row.querySelector('.grade-weight').value.replace(',', '.');
+                const grade = parseFloat(gradeStr); const weight = parseFloat(weightStr);
+                const w = (isNaN(weight) || weight <= 0) ? 1 : weight;
+                if (!isNaN(grade)) { weightedSum += grade * w; totalWeight += w; }
+            });
+            document.getElementById('weightedAvg').textContent = totalWeight > 0 ? (weightedSum / totalWeight).toFixed(2) : '-';
+        }
+
+        function calcQuizScore() {
+            const correct = parseFloat(document.getElementById('quizCorrect').value.replace(',', '.'));
+            const total = parseFloat(document.getElementById('quizTotal').value.replace(',', '.'));
+            const result = document.getElementById('quizResult');
+            if (isNaN(correct) || isNaN(total) || total <= 0) { result.textContent = '-'; return; }
+            result.textContent = ((correct / total) * 100).toFixed(1) + '%';
+        }
+
+        function countWords() {
+            const text = document.getElementById('wordText').value;
+            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+            document.getElementById('wordCount').textContent = words;
+            document.getElementById('readTime').textContent = Math.max(0, Math.ceil(words / 200)) + 'm';
+        }
+
+        // ============ 5. INICJALIZACJA ============
+        loadRoster();
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        const savedLang = localStorage.getItem('teachcrate_lang') || 'en';
+        changeLanguage(savedLang);
+    </script>
+</body>
+</html>
